@@ -1,9 +1,9 @@
 /**
  * Build styles
  */
-import './index.css';
+import './index.scss';
 
-import { IconAlignLeft, IconAlignCenter, IconQuote } from '@codexteam/icons';
+import { IconAlignLeft, IconAlignCenter, IconAlignRight, IconQuote } from '@codexteam/icons';
 
 /**
  * @class Quote
@@ -15,13 +15,13 @@ import { IconAlignLeft, IconAlignCenter, IconQuote } from '@codexteam/icons';
  * @description Quote Tool`s input and output data
  * @property {string} text - quote`s text
  * @property {string} caption - quote`s caption
- * @property {'center'|'left'} alignment - quote`s alignment
+ * @property {'center'|'left'|'right'} alignment - quote`s alignment
  *
  * @typedef {object} QuoteConfig
  * @description Quote Tool`s initial configuration
  * @property {string} quotePlaceholder - placeholder to show in quote`s text input
  * @property {string} captionPlaceholder - placeholder to show in quote`s caption input
- * @property {'center'|'left'} defaultAlignment - alignment to use as default
+ * @property {'center'|'left'|'right'} defaultAlignment - alignment to use as default
  *
  * @typedef {object} TunesMenuConfig
  * @property {string} icon - menu item icon
@@ -104,6 +104,7 @@ export default class Quote {
     return {
       left: 'left',
       center: 'center',
+      right: 'right',
     };
   }
 
@@ -168,6 +169,10 @@ export default class Quote {
         name: 'center',
         icon: IconAlignCenter,
       },
+      {
+        name: 'right',
+        icon: IconAlignRight,
+      },
     ];
   }
 
@@ -192,9 +197,10 @@ export default class Quote {
     this.data = {
       text: data.text || '',
       caption: data.caption || '',
-      alignment: Object.values(ALIGNMENTS).includes(data.alignment) && data.alignment ||
-      config.defaultAlignment ||
-      DEFAULT_ALIGNMENT,
+      alignment:
+        (Object.values(ALIGNMENTS).includes(data.alignment) && data.alignment) ||
+        config.defaultAlignment ||
+        DEFAULT_ALIGNMENT,
     };
   }
 
@@ -205,19 +211,20 @@ export default class Quote {
    */
   render() {
     const container = this._make('blockquote', [this.CSS.baseClass, this.CSS.wrapper]);
-    const quote = this._make('div', [this.CSS.input, this.CSS.text], {
+    this.quote = this._make('div', [this.CSS.text], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.text,
     });
-    const caption = this._make('div', [this.CSS.input, this.CSS.caption], {
+
+    const caption = this._make('div', [this.CSS.caption], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.caption,
     });
 
-    quote.dataset.placeholder = this.quotePlaceholder;
+    this.quote.dataset.placeholder = this.quotePlaceholder;
     caption.dataset.placeholder = this.captionPlaceholder;
 
-    container.appendChild(quote);
+    container.appendChild(this.quote);
     container.appendChild(caption);
 
     return container;
@@ -263,16 +270,16 @@ export default class Quote {
    *
    */
   renderSettings() {
-    const capitalize = str => str[0].toUpperCase() + str.substr(1);
+    const capitalize = (str) => str[0].toUpperCase() + str.substr(1);
 
-    return this.settings.map(item => ({
+    return this.settings.map((item) => ({
       icon: item.icon,
       label: this.api.i18n.t(`Align ${capitalize(item.name)}`),
       onActivate: () => this._toggleTune(item.name),
       isActive: this.data.alignment === item.name,
       closeOnActivate: true,
     }));
-  };
+  }
 
   /**
    * Toggle quote`s alignment
@@ -281,6 +288,9 @@ export default class Quote {
    * @private
    */
   _toggleTune(tune) {
+    this.quote.classList.remove(`${this.CSS.text}__${this.data.alignment}`);
+    this.quote.classList.add(`${this.CSS.text}__${tune}`);
+
     this.data.alignment = tune;
   }
 

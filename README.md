@@ -11,16 +11,20 @@ Provides Quote Blocks for the [Editor.js](https://editorjs.io).
 Get the package
 
 ```shell
-yarn add @editorjs/quote
+npm i @juratbek/editorjs-quote
+```
+
+```shell
+yarn add @juratbek/editorjs-quote
 ```
 
 Include module at your application
 
 ```javascript
-import Quote from '@editorjs/quote';
+import Quote from "@juratbek/editorjs-quote";
 ```
 
-Optionally, you can load this tool from CDN [JsDelivr CDN](https://www.jsdelivr.com/package/npm/@editorjs/quote).
+Optionally, you can load this tool from CDN [JsDelivr CDN](https://www.jsdelivr.com/package/npm/@juratbek/editorjs-quote).
 
 ## Usage
 
@@ -29,12 +33,12 @@ Add a new Tool to the `tools` property of the Editor.js initial config.
 ```javascript
 var editor = EditorJS({
   ...
-  
+
   tools: {
     ...
     quote: Quote,
   },
-  
+
   ...
 });
 ```
@@ -44,7 +48,7 @@ Or init Quote Tool with additional settings
 ```javascript
 var editor = EditorJS({
   ...
-  
+
   tools: {
     ...
     quote: {
@@ -57,17 +61,17 @@ var editor = EditorJS({
       },
     },
   },
-  
+
   ...
 });
 ```
 
 ## Config Params
 
-| Field              | Type     | Description                 |
-| ------------------ | -------- | ----------------------------|
-| quotePlaceholder   | `string` | quote's placeholder string  |
-| captionPlaceholder | `string` | caption's placeholder string|
+| Field              | Type     | Description                  |
+| ------------------ | -------- | ---------------------------- |
+| quotePlaceholder   | `string` | quote's placeholder string   |
+| captionPlaceholder | `string` | caption's placeholder string |
 
 ## Tool's settings
 
@@ -77,20 +81,19 @@ You can choose alignment for the quote. It takes no effect while editing, but sa
 
 ## Output data
 
-| Field     | Type     | Description          |
-| --------- | -------- | -------------------- |
-| text      | `string` | quote's text         |
-| caption   | `string` | caption or an author |
-| alignment | `string` | `left` or `center`   |
-
+| Field     | Type     | Description                 |
+| --------- | -------- | --------------------------- |
+| text      | `string` | quote's text                |
+| caption   | `string` | caption or an author        |
+| alignment | `string` | `left`, `right` or `center` |
 
 ```json
 {
-    "type" : "quote",
-    "data" : {
-        "text" : "The unexamined life is not worth living.",
-        "caption" : "Socrates",
-        "alignment" : "left"
-    }
+  "type": "quote",
+  "data": {
+    "text": "The unexamined life is not worth living.",
+    "caption": "Socrates",
+    "alignment": "left"
+  }
 }
 ```

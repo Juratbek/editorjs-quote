@@ -2,3 +2,8 @@
 src/
 vite.config.js
 yarn.lock
+.vscode
+example
+.github
+node_modules
+.gitignore
