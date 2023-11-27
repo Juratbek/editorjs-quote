@@ -10,19 +10,22 @@
     outline: none;
     font-style: oblique;
     position: relative;
-    min-width: 120px;
     margin-left: auto;
     width: fit-content;
+
+    &:empty:not(:focus) {
+      min-width: 120px;
+    }
 
     &:not(:empty),
     &:focus {
       padding-left: 20px;
     }
 
-    &[contentEditable="true"] {
+    &[contentEditable='true'] {
       &:not(:empty):before,
       &[data-placeholder]:empty:focus::before {
-        content: "\2015";
+        content: '\2015';
         opacity: 1;
         left: 0;
       }
@@ -44,10 +47,10 @@
       text-align: right;
     }
 
-    &[contentEditable="true"] {
+    &[contentEditable='true'] {
       &:not(:empty):before,
       &[data-placeholder]:empty:focus::before {
-        content: "\275D";
+        content: '\275D';
         opacity: 1;
         left: 20px;
       }
@@ -55,7 +58,7 @@
   }
 }
 
-.cdx-quote [contentEditable="true"][data-placeholder]::before {
+.cdx-quote [contentEditable='true'][data-placeholder]::before {
   position: absolute;
   content: attr(data-placeholder);
   color: #707684;
@@ -63,11 +66,11 @@
   opacity: 0;
 }
 
-.cdx-quote [contentEditable="true"][data-placeholder]:empty::before {
+.cdx-quote [contentEditable='true'][data-placeholder]:empty::before {
   opacity: 1;
 }
 
-.cdx-quote [contentEditable="true"][data-placeholder]:empty:focus::before {
+.cdx-quote [contentEditable='true'][data-placeholder]:empty:focus::before {
   opacity: 0;
 }
 
