@@ -1,15 +1,14 @@
 {
-  "name": "@editorjs/quote",
-  "version": "2.6.0",
+  "name": "@juratbek/editorjs-quote",
+  "version": "1.0.0",
   "keywords": [
-    "codex editor",
     "quote",
     "editor.js",
     "editorjs"
   ],
   "description": "Quote Tool for Editor.js",
   "license": "MIT",
-  "repository": "https://github.com/editor-js/quote",
+  "repository": "https://github.com/juratbek/editorjs-quote",
   "files": [
     "dist"
   ],
@@ -26,8 +25,7 @@
     "build": "vite build"
   },
   "author": {
-    "name": "CodeX",
-    "email": "team@codex.so"
+    "name": "Jur'atbek"
   },
   "devDependencies": {
     "vite": "^4.5.0",
