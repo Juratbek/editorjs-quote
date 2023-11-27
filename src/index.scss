@@ -15,7 +15,6 @@
 
     &:empty:not(:focus) {
       min-width: 120px;
-      right: 0;
     }
 
     &:not(:empty),
@@ -24,6 +23,10 @@
     }
 
     &[contentEditable='true'] {
+      &:empty:before {
+        right: 0;
+      }
+
       &:not(:empty):before,
       &[data-placeholder]:empty:focus::before {
         content: '\2015';
